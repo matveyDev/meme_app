@@ -90,6 +90,9 @@ export default {
 
     const copyContractAddress = async () => {
       try {
+        if (!navigator.clipboard) {
+          throw new Error('Clipboard API not available in this browser or context');
+        }
         await navigator.clipboard.writeText(contractAddress.value);
         
         isCopied.value = true;
@@ -103,6 +106,30 @@ export default {
         }, 2000);
       } catch (error) {
         console.error('Failed to copy contract address:', error);
+        // Fallback method for copying text
+        try {
+          const textArea = document.createElement('textarea');
+          textArea.value = contractAddress.value;
+          textArea.style.position = 'fixed';
+          textArea.style.left = '-999999px';
+          textArea.style.top = '-999999px';
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+          const successful = document.execCommand('copy');
+          if (successful) {
+            isCopied.value = true;
+            if (copyTimeout.value) {
+              clearTimeout(copyTimeout.value);
+            }
+            copyTimeout.value = setTimeout(() => {
+              isCopied.value = false;
+            }, 2000);
+          }
+          document.body.removeChild(textArea);
+        } catch (fallbackError) {
+          console.error('Fallback copy method also failed:', fallbackError);
+        }
       }
     };
 

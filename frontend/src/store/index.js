@@ -1,16 +1,17 @@
 import { createStore } from 'vuex'
+import { API_URL } from '@/config'
 
 export default createStore({
   state: {
-    memes: [],
+    mixeds: [],
     users: [],
     currentUser: null
   },
   mutations: {
-    setMemes(state, memes) {
-      state.memes = memes
+    SET_MIXEDS(state, mixeds) {
+      state.mixeds = mixeds
     },
-    setUsers(state, users) {
+    SET_USERS(state, users) {
       state.users = users
     },
     setCurrentUser(state, user) {
@@ -18,20 +19,20 @@ export default createStore({
     }
   },
   actions: {
-    async fetchMemes({ commit }) {
+    async fetchMixeds({ commit }) {
       try {
-        const response = await fetch('http://localhost:8000/api/mixeds/')
+        const response = await fetch(`${API_URL}/api/mixeds/`)
         const data = await response.json()
-        commit('setMemes', data)
+        commit('SET_MIXEDS', data)
       } catch (error) {
-        console.error('Error fetching memes:', error)
+        console.error('Error fetching mixeds:', error)
       }
     },
     async fetchUsers({ commit }) {
       try {
-        const response = await fetch('http://localhost:8000/api/users/')
+        const response = await fetch(`${API_URL}/api/users/`)
         const data = await response.json()
-        commit('setUsers', data)
+        commit('SET_USERS', data)
       } catch (error) {
         console.error('Error fetching users:', error)
       }

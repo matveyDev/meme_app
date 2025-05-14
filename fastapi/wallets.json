@@ -1,0 +1,32 @@
+{
+  "EXfzSjYdnRVzEyCxrX4VXm46SAgiRRqSBf41SumPFpnX": {
+    "canGenerate": true,
+    "usedGenerations": 3,
+    "limit": 10
+  },
+  "4MG97xPwZA9cx2EMCg1t2B1wktPA9zmF34qFGoFtAvtH": {
+    "canGenerate": true,
+    "usedGenerations": 2,
+    "limit": 12
+  },
+  "DnabWsqAdShXWTmYN4w7zGH4kZbNFBwYFSRrvpy8fuVc": {
+    "canGenerate": false,
+    "usedGenerations": 2,
+    "limit": 2
+  },
+  "8o8CK82XEEJfAnpxuho3AetSE4YSy8Jum7EcZ1DBt3ZB": {
+    "canGenerate": true,
+    "usedGenerations": 0,
+    "limit": 2
+  },
+  "4XSn6oF3eTMgJqpnf8MQi47RamDwzQy4eWdj1sxJmXNY": {
+    "canGenerate": true,
+    "usedGenerations": 1,
+    "limit": 70
+  },
+  "FwQvUj8vMfDRWxC2B94AB7EnawtQ8EYhCdwuHe942KSg": {
+    "canGenerate": true,
+    "usedGenerations": 0,
+    "limit": 2
+  }
+}

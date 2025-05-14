@@ -19,7 +19,7 @@ A web application that generates memes using AI. Built with Vue.js and FastAPI.
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/meme_app.git
+git clone https://github.com/matveyDev/meme_app.git
 cd meme_app
 ```
 

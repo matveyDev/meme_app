@@ -1,37 +1,47 @@
-from typing import Union
-
+# === main.py ===
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from api.models_api import router as models_router
-from api.chat_gpt_api import router as chatgpt_router
+from fastapi.staticfiles import StaticFiles
+from config.settings import settings
+from app.routes import router as meme_router
+import os
 
 app = FastAPI(
     title="Meme App API",
-    description="API for managing memes, spices, animals and users",
+    description="API for generating memes with Leonardo AI",
     version="1.0.0",
-    docs_url="/docs",  # Swagger UI endpoint
-    redoc_url="/redoc"  # ReDoc endpoint
+    docs_url="/docs",
+    redoc_url="/redoc"
 )
 
 # CORS middleware configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080"],  # Vue.js development server
+    allow_origins=["*", "http://localhost:8080"],
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# Include routers
-app.include_router(models_router, prefix="/api", tags=["models"])
-app.include_router(chatgpt_router, prefix="/api/chatgpt", tags=["chatgpt"])
+# Register router
+app.include_router(meme_router)
 
+# Ensure the static directory exists
+os.makedirs(settings.STATIC_FOLDER, exist_ok=True)
+
+# Mount static files directory
+app.mount("/generated", StaticFiles(directory=str(settings.STATIC_FOLDER)), name="generated")
+
+# Root route
 @app.get("/")
 async def root():
     return {"message": "Welcome to Meme App API"}
 
+# Health check endpoint
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
-
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

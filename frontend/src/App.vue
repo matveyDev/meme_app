@@ -1,47 +1,93 @@
 <template>
   <v-app>
-    <app-header class="app-header" />
-    <v-main>
-      <v-container fluid class="pa-0">
-        <router-view></router-view>
-      </v-container>
-    </v-main>
+    <div class="app">
+      <AppHeader 
+        :wallet-address="walletAddress"
+        @open-wallet-dialog="openWalletDialog" 
+      />
+      <v-main class="main-content">
+        <div class="content-wrapper">
+          <router-view />
+        </div>
+      </v-main>
+      <AppFooter />
+      <WalletDialog
+        v-model:isOpen="isWalletDialogOpen"
+        v-model:walletAddress="walletAddress"
+      />
+    </div>
   </v-app>
 </template>
 
 <script>
-import AppHeader from '@/components/AppHeader.vue'
+import { ref } from 'vue';
+import AppHeader from './components/AppHeader.vue';
+import AppFooter from './components/Footer.vue';
+import WalletDialog from './components/WalletDialog.vue';
 
 export default {
   name: 'App',
   components: {
-    AppHeader
+    AppHeader,
+    AppFooter,
+    WalletDialog
+  },
+  setup() {
+    const isWalletDialogOpen = ref(false);
+    const walletAddress = ref(null);
+
+    const openWalletDialog = () => {
+      isWalletDialogOpen.value = true;
+    };
+
+    return {
+      isWalletDialogOpen,
+      walletAddress,
+      openWalletDialog
+    };
   }
-}
+};
 </script>
 
 <style>
-.v-application {
-  background: #121212;
+.app {
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.048), rgba(0, 0, 0, 0.425)), url('@/assets/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: white;
+  display: flex;
+  flex-direction: column;
 }
 
-.v-main {
+.v-application {
+  background: transparent !important;
+}
+
+.main-content {
+  flex: 1 0 auto;
   padding-top: 0 !important;
+  display: flex;
+  flex-direction: column;
 }
 
-.app-header {
-  width: 100%;
-  z-index: 100;
-}
-
-.main-container {
-  padding-top: 120px !important;
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 200px);
+  /* padding: 20px; */
 }
 
 @media (max-width: 768px) {
-  .main-container {
-    padding-top: 160px !important;
+  .app {
+    min-height: 100vh;
+  }
+  
+  .content-wrapper {
+    min-height: calc(100vh - 240px);
+    padding: 10px 0px;
   }
 }
 </style> 

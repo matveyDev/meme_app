@@ -4,7 +4,7 @@ import os
 
 class Settings(BaseSettings):
     # Server settings
-    SERVER_HOST: str = "localhost"
+    SERVER_HOST: str = "178.128.155.247"
     SERVER_PORT: int = 8000
     SERVER_URL: str = f"http://{SERVER_HOST}:{SERVER_PORT}"
     

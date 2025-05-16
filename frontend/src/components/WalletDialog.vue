@@ -115,14 +115,22 @@ export default {
       try {
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-        if (isMobile) {
-          const deepLink = walletType === 'phantom'
-            ? 'https://phantom.app/ul/v1/connect?app_url=https%3A%2F%2Fbrainrotlab.io'
-            : 'https://solflare.com/ul/browse/https://brainrotlab.io';
+        // ✅ Мобильный Phantom — показываем инструкцию
+        if (isMobile && walletType === 'phantom') {
+          alert(
+            "To connect with Phantom on mobile:\n\n1. Open the Phantom App\n2. Go to the 'Browser' tab\n3. Enter:\nhttps://brainrotlab.io"
+          );
+          return;
+        }
+
+        // ✅ Мобильный Solflare — deeplink
+        if (isMobile && walletType === 'solflare') {
+          const deepLink = 'https://solflare.com/ul/browse/https://brainrotlab.io';
           window.location.href = deepLink;
           return;
         }
 
+        // ✅ Desktop / In-App: PHANTOM
         if (walletType === 'phantom') {
           const provider = window.solana;
 
@@ -138,6 +146,7 @@ export default {
               throw new Error('No public key returned');
             }
 
+            // опционально можно убрать signMessage (ненужно для большинства кейсов)
             const message = new TextEncoder().encode("Verify ownership");
             const signed = await provider.signMessage(message, "utf8");
 
@@ -161,7 +170,10 @@ export default {
             emit('update:walletAddress', null);
             await onWalletConnected(null);
           }
-        } else if (walletType === 'solflare') {
+        }
+
+        // ✅ Desktop / In-App: SOLFLARE
+        else if (walletType === 'solflare') {
           if (!window.solflare) {
             window.open('https://solflare.com/', '_blank');
             return;
@@ -178,6 +190,7 @@ export default {
           await onWalletConnected(address);
           emit('update:isOpen', false);
         }
+
       } catch (error) {
         console.error('Error connecting wallet:', error);
         Cookies.remove('wallet_address');
@@ -187,6 +200,7 @@ export default {
         await onWalletConnected(null);
       }
     };
+
 
     const disconnectWallet = async () => {
       try {

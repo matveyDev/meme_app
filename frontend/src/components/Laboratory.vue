@@ -1470,6 +1470,16 @@ export default {
     font-size: 1.6rem;
     padding-top: 20px;
     margin-bottom: 1rem;
+    animation: glowMobile 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes glowMobile {
+    from {
+      text-shadow: 0 0 2px #00ff00;
+    }
+    to {
+      text-shadow: 0 0 6px #00ff00;
+    }
   }
 
   .generate-button-container {

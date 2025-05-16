@@ -115,22 +115,26 @@ export default {
       try {
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-        // ✅ Мобильный Phantom — показываем инструкцию
+        // 📲 Phantom (мобильный): показать инструкцию
         if (isMobile && walletType === 'phantom') {
           alert(
-            "To connect with Phantom on mobile:\n\n1. Open the Phantom App\n2. Go to the 'Browser' tab\n3. Enter:\nhttps://brainrotlab.io"
+            "📲 To connect Phantom wallet on mobile:\n\n" +
+            "1. Open the Phantom App\n" +
+            "2. Go to the 'Browser' tab\n" +
+            "3. Enter: https://brainrotlab.io\n\n" +
+            "You must open the dApp from inside Phantom for connection to work."
           );
           return;
         }
 
-        // ✅ Мобильный Solflare — deeplink
+        // 📲 Solflare (мобильный): deeplink работает
         if (isMobile && walletType === 'solflare') {
           const deepLink = 'https://solflare.com/ul/browse/https://brainrotlab.io';
           window.location.href = deepLink;
           return;
         }
 
-        // ✅ Desktop / In-App: PHANTOM
+        // 💻 Desktop: Phantom
         if (walletType === 'phantom') {
           const provider = window.solana;
 
@@ -141,18 +145,7 @@ export default {
 
           try {
             const response = await provider.connect();
-
-            if (!response?.publicKey) {
-              throw new Error('No public key returned');
-            }
-
-            // опционально можно убрать signMessage (ненужно для большинства кейсов)
-            const message = new TextEncoder().encode("Verify ownership");
-            const signed = await provider.signMessage(message, "utf8");
-
-            if (!signed || !signed.signature) {
-              throw new Error("User did not sign message — wallet probably locked");
-            }
+            if (!response?.publicKey) throw new Error('No public key returned');
 
             const address = response.publicKey.toString();
             Cookies.set('wallet_address', address);
@@ -161,7 +154,6 @@ export default {
             emit('update:walletAddress', address);
             emit('update:isOpen', false);
             await onWalletConnected(address);
-
           } catch (err) {
             console.error("Phantom connection failed:", err);
             Cookies.remove('wallet_address');
@@ -172,9 +164,9 @@ export default {
           }
         }
 
-        // ✅ Desktop / In-App: SOLFLARE
+        // 💻 Desktop: Solflare
         else if (walletType === 'solflare') {
-          if (!window.solflare) {
+          if (!window.solflare?.isSolflare) {
             window.open('https://solflare.com/', '_blank');
             return;
           }
@@ -187,8 +179,8 @@ export default {
           Cookies.set('wallet_type', walletType);
           walletStore.setWalletType(walletType);
           emit('update:walletAddress', address);
-          await onWalletConnected(address);
           emit('update:isOpen', false);
+          await onWalletConnected(address);
         }
 
       } catch (error) {
@@ -200,6 +192,7 @@ export default {
         await onWalletConnected(null);
       }
     };
+
 
 
     const disconnectWallet = async () => {

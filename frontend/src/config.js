@@ -1,1 +1,1 @@
-export const API_URL = 'http://178.128.155.247:8000';
+export const API_URL = 'https://api.brainrotlab.io';

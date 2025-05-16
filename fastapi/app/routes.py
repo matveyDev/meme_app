@@ -56,7 +56,8 @@ def use_generation(request: WalletRequest, req: Request):
         raise HTTPException(status_code=404, detail="User not initialized.")
     if not user["canGenerate"] or user["usedGenerations"] >= user["limit"]:
         raise HTTPException(status_code=403, detail="Generation limit reached or access denied.")
-    check_and_update_ip_limit(req, user["limit"])
+    # Check IP Limit
+    # check_and_update_ip_limit(req, user["limit"])
     user["usedGenerations"] += 1
     if user["usedGenerations"] >= user["limit"]:
         user["canGenerate"] = False

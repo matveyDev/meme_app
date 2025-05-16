@@ -1457,10 +1457,39 @@ export default {
     font-size: 4.5rem;
   }
 
+  .generate-button-container {
+    margin: 1.5rem 0;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    z-index: 10;
+  }
+
   .generate-button {
     width: 100%;
     font-size: 18px;
     padding: 15px 20px;
+    position: relative;
+    z-index: 11;
+    pointer-events: auto;
+  }
+
+  .generate-button::after {
+    display: none;
+  }
+
+  .generate-button.loading::after {
+    display: none;
+  }
+
+  .button-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+
+  .wallet-connect-text {
+    position: relative;
+    z-index: 10;
   }
 
   .generated-meme-container {

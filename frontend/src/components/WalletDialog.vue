@@ -121,8 +121,8 @@ export default {
 
         if (isMobile) {
           const deepLink = walletType === 'phantom'
-            ? 'https://phantom.app/ul/browse/https://your-app-url.com'
-            : 'https://solflare.com/ul/browse/https://your-app-url.com';
+            ? 'https://phantom.app/ul/browse/https://brainrotlab.io'
+            : 'https://solflare.com/ul/browse/https://brainrotlab.io';
           window.location.href = deepLink;
           return;
         }

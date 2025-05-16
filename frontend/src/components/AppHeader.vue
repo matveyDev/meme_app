@@ -4,7 +4,7 @@
       <div class="desktop-elements">
         <div class="token-info">
           <a aria-current="page" href="/" class="is-active is-exact-active ln-header-center-logo">
-            <img class="img-responsive" src="@/assets/coin.jpg" alt="Token">
+            <img class="img-responsive" src="@/assets/coin.webp" alt="Token">
           </a>
           <p>BrainRotCoin</p>
         </div>
@@ -12,7 +12,7 @@
       <div class="mobile-elements">
         <div class="token-info">
           <a aria-current="page" href="/" class="is-active is-exact-active ln-header-center-logo">
-            <img class="img-responsive" src="@/assets/coin.jpg" alt="Token">
+            <img class="img-responsive" src="@/assets/coin.webp" alt="Token">
           </a>
           <p>BrainRotCoin</p>
         </div>

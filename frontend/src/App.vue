@@ -52,7 +52,7 @@ export default {
 <style>
 .app {
   min-height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.048), rgba(0, 0, 0, 0.425)), url('@/assets/background.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.048), rgba(0, 0, 0, 0.425)), url('@/assets/background.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

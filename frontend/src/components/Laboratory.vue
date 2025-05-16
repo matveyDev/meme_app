@@ -16,7 +16,7 @@
       <div class="selection-cards" v-if="!generatedMeme">
         <div class="selection-card" :class="{ selected: selectedAnimal }" @click="openAnimalModal">
           <template v-if="!selectedAnimal">
-            <div class="card-icon">🐾</div>
+            <div class="card-icon">🦁</div>
             <h2 class="card-title">Animal</h2>
           </template>
           <template v-else>

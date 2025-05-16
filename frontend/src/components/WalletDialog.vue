@@ -33,21 +33,11 @@
         
         <div v-else class="connect-options">
           <button class="connect-button" @click="connectWallet('phantom')">
-            <span class="wallet-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12V7H5a2 2 0 0 0 0 4h14v1"></path>
-                <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
-                <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path>
-              </svg>
-            </span>
+            <span class="wallet-icon">👻</span>
             Phantom Wallet
           </button>
           <button class="connect-button solflare" @click="connectWallet('solflare')">
-            <span class="wallet-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-              </svg>
-            </span>
+            <span class="wallet-icon">⚡</span>
             Solflare Wallet
           </button>
         </div>
@@ -350,7 +340,7 @@ export default {
   justify-content: center;
   width: 40px;
   height: 40px;
-  color: #7b61ff;
+  font-size: 24px;
   filter: drop-shadow(0 0 5px rgba(123, 97, 255, 0.5));
 }
 
@@ -427,7 +417,6 @@ export default {
 }
 
 .connect-button.solflare .wallet-icon {
-  color: #ffcc00;
   filter: drop-shadow(0 0 5px rgba(255, 204, 0, 0.5));
 }
 
@@ -458,8 +447,9 @@ export default {
   }
   
   .wallet-icon {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
   }
   
   .wallet-address {

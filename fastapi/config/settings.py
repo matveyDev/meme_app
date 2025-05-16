@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     # Server settings
     SERVER_HOST: str = "178.128.155.247"
     SERVER_PORT: int = 8000
-    SERVER_URL: str = "https://api.brainrotlab.io"
+    SERVER_URL: str = "https://api.brainrotlab.io/"
     
     # Leonardo API settings
     LEONARDO_API_KEY: str = "4e289ba7-88c3-41e6-a84c-348815cab808"

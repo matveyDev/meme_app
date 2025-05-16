@@ -1,7 +1,12 @@
 from fastapi import Request, HTTPException
 import redis
+import os
 
-redis_client = redis.Redis(host='localhost', port=6379, db=0)
+redis_client = redis.Redis(
+    host=os.getenv("REDIS_HOST", "localhost"),
+    port=int(os.getenv("REDIS_PORT", 6379)),
+    decode_responses=True
+)
 IP_LIMIT = 2
 
 def check_and_update_ip_limit(request: Request, wallet_limit: int):

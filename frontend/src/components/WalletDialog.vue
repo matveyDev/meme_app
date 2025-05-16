@@ -15,11 +15,7 @@
         <div v-if="walletAddress" class="connected-wallet">
           <div class="wallet-info">
             <span class="wallet-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12V7H5a2 2 0 0 0 0 4h14v1"></path>
-                <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
-                <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path>
-              </svg>
+              💎
             </span>
             <div class="address-info">
               <p>Connected Wallet</p>
@@ -121,7 +117,7 @@ export default {
 
         if (isMobile) {
           const deepLink = walletType === 'phantom'
-            ? 'https://phantom.app/ul/browse/https://brainrotlab.io'
+            ? 'https://phantom.app/ul/v1/connect?app_url=https%3A%2F%2Fbrainrotlab.io'
             : 'https://solflare.com/ul/browse/https://brainrotlab.io';
           window.location.href = deepLink;
           return;

@@ -114,9 +114,9 @@ export default {
     const connectWallet = async (walletType) => {
       try {
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        const isPhantomApp = navigator.userAgent.includes("Phantom");
 
-        // 📲 Phantom (мобильный): показать инструкцию
-        if (isMobile && walletType === 'phantom') {
+        if (isMobile && walletType === 'phantom' && !isPhantomApp) {
           alert(
             "📲 To connect Phantom wallet on mobile:\n\n" +
             "1. Open the Phantom App\n" +

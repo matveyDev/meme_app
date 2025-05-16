@@ -90,19 +90,15 @@
         <div class="button-wrapper">
           <p v-if="!isConnected" class="wallet-connect-text">Connect your wallet first</p>
           <p v-else-if="!canGenerate" class="wallet-connect-text">{{ generationMessage }}</p>
-          <button 
-            class="generate-button"
-            :class="{ 
-              loading: isLoading,
-              'unlock-button': !canGenerate && isConnected,
-              'disabled': !isConnected || (!canGenerate && !isConnected)
-            }"
+          <button
             :disabled="!isConnected || isLoading || isUnlocking"
-            @click="canGenerate ? generateMeme() : handleUnlockMore()"
+            @click="onGenerateClick"
+            class="generate-button"
           >
-            <span class="button-text">{{ canGenerate ? 'MAKE MEME' : 'UNLOCK MORE' }}</span>
-            <span v-if="isLoading" class="loading-spinner">⌛</span>
+            <span v-if="isLoading">⌛</span>
+            <span v-else>{{ canGenerate ? 'MAKE MEME' : 'UNLOCK MORE' }}</span>
           </button>
+
         </div>
       </div>
 
@@ -236,6 +232,13 @@ export default {
     }
   },
   methods: {
+    onGenerateClick() {
+      if (this.canGenerate) {
+        this.generateMeme();
+      } else {
+        this.handleUnlockMore();
+      }
+    },
     openAnimalModal() {
       this.showAnimalModal = true;
     },

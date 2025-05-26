@@ -13,7 +13,7 @@
 
 
         </a>
-        <a href="https://x.com/BrainRotLab" target="_blank" class="social-link">
+        <a href="https://x.com/BrainRotLabs" target="_blank" class="social-link">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1227" width="24" height="24">
   <defs>
     <linearGradient id="x-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
